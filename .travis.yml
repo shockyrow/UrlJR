@@ -1,7 +1,13 @@
 language: php
 
+services:
+  - mysql
+
 php:
   - '7.2'
+
+before_install:
+  - mysql -e 'CREATE DATABASE laravel;'
 
 before_script:
   - composer install
