@@ -12,7 +12,7 @@ before_install:
 before_script:
   - composer install
   - cp .env.testing.example .env
-  - php artisan key:generate
+  - php artisan key:generate --env=testing
   - php artisan migrate
 
 script:
