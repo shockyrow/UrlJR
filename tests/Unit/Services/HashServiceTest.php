@@ -41,7 +41,7 @@ class HashServiceTest extends TestCase
         $texts = collect(["example1", "example2", "example3"]);
 
         return $texts->map(function ($text) {
-            return [sha1($text).md5($text), $text];
+            return [sha1($text) . md5($text), $text];
         });
     }
 }

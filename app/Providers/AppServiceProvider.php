@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\Services\HashService;
+use App\Http\Services\UrlService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->app->singleton(HashService::class);
+        $this->app->singleton(UrlService::class);
+
+        $this->app->when(UrlService::class)
+            ->needs('$shortUrlCharacters')
+            ->give(config('services.url.short_url_characters'))
+        ;
+
+        $this->app->when(UrlService::class)
+            ->needs('$shortUrlLength')
+            ->give(config('services.url.short_url_length'))
+        ;
     }
 }
