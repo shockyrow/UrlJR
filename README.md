@@ -8,7 +8,7 @@ Basic URL shortening service. Only standard Laravel is used.
 
 ### Short URL Generation
 
-In this service in order to shorten an URL, URL's database id is used which is an unsigned number and converted that to a short string of characters (default: a-z, A-Z, 0-9) with a fixed length (default: 6). Because of that the the short URLs will be sorted according to the characters provided. The following table will show you some examples:
+In this service in order to shorten an URL, URL's database id is used which is an unsigned number and converted to a short string of characters (default: a-z, A-Z, 0-9) with a fixed length (default: 6). Because of that the the short URLs will be sorted according to the characters provided. The following table will show you some examples:
 
 <table>
 <tr>
