@@ -44,4 +44,21 @@ return [
         ],
     ],
 
+    'url' => [
+        'short_url_characters' => env(
+            'SHORT_URL_CHARACTERS',
+            implode(
+                array_merge(
+                    range('a', 'z'),
+                    range('A', 'Z'),
+                    range('0', '9')
+                )
+            )
+        ),
+        'short_url_length' => env(
+            'SHORT_URL_LENGTH',
+            6
+        ),
+    ],
+
 ];
