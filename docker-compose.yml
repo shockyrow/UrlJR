@@ -1,0 +1,54 @@
+version: "3"
+
+services:
+  mysql:
+    user: 1000:1000
+    image: mysql:5.7
+    container_name: lemp-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: homestead
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD: secret
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+    networks:
+      backend:
+        ipv4_address: 10.10.10.10
+  php:
+    user: 1000:1000
+    build: ./docker/php
+    container_name: lemp-php
+    working_dir: /app
+    depends_on:
+      - mysql
+    volumes:
+      - .:/app
+    networks:
+      - backend
+  nginx:
+    image: tutum/nginx
+    container_name: lemp-nginx
+    hostname: project
+    domainname: project.dev.docker
+    working_dir: /app
+    ports:
+      - "8080:80"
+    depends_on:
+      - php
+    volumes:
+      - .:/app
+      - ./docker/nginx/default:/etc/nginx/sites-enabled/default
+      - ./docker/nginx/logs:/var/log/nginx
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.10.10.0/24
