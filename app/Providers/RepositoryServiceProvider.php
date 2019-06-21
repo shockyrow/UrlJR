@@ -11,11 +11,9 @@ use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
-    protected $defer = true;
-
-    public function register()
+    public function boot()
     {
-        $this->app->bind(UrlRepository::class, env('URL_REPOSITORY_CLASS', EloquentUrl::class));
+        $this->app->singleton(UrlRepository::class, env('URL_REPOSITORY_CLASS', EloquentUrl::class));
 
         $this->app->when(UrlService::class)
             ->needs('$shortUrlCharacters')
