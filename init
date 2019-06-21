@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cp -n .env.example .env
+php artisan key:generate
+php artisan migrate
+
+echo "Project configuration done!";
