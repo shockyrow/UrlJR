@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cp -n .env.docker .env
+cp -n .env.docker.example .env
 php artisan key:generate
 php artisan migrate
 
